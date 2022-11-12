@@ -5,9 +5,9 @@
 package com.example.tp_labiv.repositories;
 
 import com.example.tp_labiv.data.exceptions.DaoException;
+import com.example.tp_labiv.dtos.ReporteDTO;
 import com.example.tp_labiv.models.Empleado;
 import com.example.tp_labiv.models.Recibo;
-import com.example.tp_labiv.models.Reporte;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -47,16 +47,16 @@ public class EmpleadoDaoJPA implements EmpleadoRepository {
     }
     
         @Override
-    public List<String[]> getReporte(int anio, int mes) throws DaoException {
+    public List<ReporteDTO[]> getReporte(int anio, int mes) throws DaoException {
        
-        String consulta="select sum(sueldo_bruto+monto_antig-(obra_social+fondo_complej+jubilacion)) as sueldoNeto, empleados.area\n" +
+        String consulta="select sum(sueldo_bruto+monto_antig-(obra_social+fondo_complej+jubilacion)), empleados.area\n" +
 "from empleados join recibos on empleados.legajo=recibos.legajo where recibos.anio=(:anio) and recibos.mes=(:mes)\n" +
 "group by empleados.area\n" +
-"order by sueldoNeto"; 
+"order by 1"; 
         Query q = em.createNativeQuery(consulta);
          q.setParameter("anio", anio);
          q.setParameter("mes", mes);
-        return (List<String[]>) q.getResultList();
+        return (List<ReporteDTO[]>) q.getResultList();
     }
     
 
