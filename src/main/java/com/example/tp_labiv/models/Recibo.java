@@ -12,10 +12,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Formula;
 
 /**
  *
@@ -52,5 +54,17 @@ public class Recibo {
     @JoinColumn (name = "legajo")
     @JsonBackReference
     private Empleado empleado;
+    
+//    @Transient
+//    private double sueldoNeto=this.jubilacion;
+//    @Formula("monto_antig+e.sueldo_bruto")
+//    private float sueldoNeto;
+   // private double valor= empleado.getSueldoBruto();
+    
+//        @Formula("(select count(monto_antig) from recibos)")
+//    private float sueldoNeto;
+        
+    @Formula("(select empleados.sueldo_bruto+monto_antig-(obra_social+fondo_complej+jubilacion) from empleados where empleados.legajo=legajo)")
+    private float sueldoBruto;
     
 }

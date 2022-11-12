@@ -7,6 +7,7 @@ package com.example.tp_labiv.repositories;
 
 import com.example.tp_labiv.data.exceptions.DaoException;
 import com.example.tp_labiv.models.Empleado;
+import com.example.tp_labiv.models.Recibo;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -23,6 +24,11 @@ public class EmpleadoDaoJPA implements EmpleadoRepository{
         @Override
     public List<Empleado> getAll() throws DaoException {
         return em.createQuery("SELECT e FROM Empleado e", Empleado.class).getResultList();
+    }
+    
+        @Override
+    public List<Recibo> getbyId(int id) throws DaoException {
+        return (List<Recibo>) em.createQuery("SELECT e FROM Recibo e WHERE e.empleado.legajo="+id, Recibo.class).getResultList();
     }
     
 }

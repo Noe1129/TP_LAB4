@@ -30,7 +30,7 @@ import lombok.Setter;
 @Table(name = "empleados")
 public class Empleado {
 
-    @Id
+ @Id
   //  @GeneratedValue
     @Column(name = "legajo")
     private int legajo;
@@ -47,8 +47,8 @@ public class Empleado {
     @Column(name = "sueldo_bruto")
     private double sueldoBruto;
 
-//    @OneToMany(targetEntity = Recibo.class, mappedBy = "empleado")
-//    @JsonManagedReference
-//    private List<Recibo> recibos;
+    @OneToMany(targetEntity = Recibo.class, mappedBy = "empleado")
+    @JsonManagedReference
+    private List<Recibo> recibos;
 
 }

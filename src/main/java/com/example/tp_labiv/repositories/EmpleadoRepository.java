@@ -6,6 +6,7 @@ package com.example.tp_labiv.repositories;
 
 import com.example.tp_labiv.data.exceptions.DaoException;
 import com.example.tp_labiv.models.Empleado;
+import com.example.tp_labiv.models.Recibo;
 import java.util.List;
 
 /**
@@ -14,4 +15,5 @@ import java.util.List;
  */
 public interface EmpleadoRepository {
     List<Empleado> getAll() throws DaoException;
+    List<Recibo> getbyId(int id) throws DaoException ;
 }
