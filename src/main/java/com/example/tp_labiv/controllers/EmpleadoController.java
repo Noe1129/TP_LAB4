@@ -82,10 +82,10 @@ public class EmpleadoController {
 
     }
     
-        @GetMapping("/reporte/{anio}/{mes}")
-    public ResponseEntity<?> getReporte(@PathVariable int anio,@PathVariable int mes) {
+    @GetMapping("/reporte/{year}/{month}")
+    public ResponseEntity<?> getReporte(@PathVariable int year, @PathVariable int month) {
         try {
-            return ResponseEntity.ok(dao.getReporte(anio,mes));
+            return ResponseEntity.ok(dao.getReporte(year,month));
         } catch (DaoException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }

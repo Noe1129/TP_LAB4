@@ -6,6 +6,7 @@ package com.example.tp_labiv.repositories;
 
 import com.example.tp_labiv.data.exceptions.DaoException;
 import com.example.tp_labiv.dtos.ReporteDTO;
+import com.example.tp_labiv.dtos.ReporteSueldoArea;
 import com.example.tp_labiv.models.Empleado;
 import com.example.tp_labiv.models.Recibo;
 import java.util.List;
@@ -22,6 +23,6 @@ public interface EmpleadoRepository {
 
     void createRecibo(Recibo recibo) throws DaoException;
 
-    public List<ReporteDTO[]> getReporte(int anio, int mes) throws DaoException;
+    public List<ReporteSueldoArea> getReporte(int year, int month) throws DaoException;
 
 }
