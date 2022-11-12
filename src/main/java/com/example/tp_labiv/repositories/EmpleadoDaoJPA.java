@@ -28,6 +28,12 @@ public class EmpleadoDaoJPA implements EmpleadoRepository {
         return em.createQuery("SELECT e FROM Empleado e", Empleado.class).getResultList();
     }
 
+    @Transactional
+    public void createEmpleado(Empleado empleado) {
+
+        em.merge(empleado);
+    }
+
     @Override
     public List<Recibo> getbyId(int id) throws DaoException {
         return (List<Recibo>) em.createQuery("SELECT e FROM Recibo e WHERE e.empleado.legajo=" + id, Recibo.class).getResultList();
@@ -37,7 +43,7 @@ public class EmpleadoDaoJPA implements EmpleadoRepository {
     public void createRecibo(Recibo recibo) {
         Empleado emp = em.find(Empleado.class, recibo.getEmpleado().getLegajo());
         emp.addRecibo(recibo);
-        
+
         em.merge(recibo);
     }
 

@@ -5,6 +5,7 @@
 package com.example.tp_labiv.controllers;
 
 import com.example.tp_labiv.data.exceptions.DaoException;
+import com.example.tp_labiv.dtos.EmpleadoDTO;
 import com.example.tp_labiv.dtos.ReciboDTO;
 import com.example.tp_labiv.models.Empleado;
 import com.example.tp_labiv.models.Recibo;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -26,19 +28,34 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @Setter
 
-//@RequestMapping("/empleados")//de similtp
+@RequestMapping("/empleados")//de similtp
 public class EmpleadoController {
 
     @Autowired //de producto
     private EmpleadoRepository dao;
 
-    @GetMapping("/empleados")
+    @GetMapping("")
     public ResponseEntity<?> getAll() {
         try {
             return ResponseEntity.ok(dao.getAll());
         } catch (DaoException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
+    }
+
+    @PostMapping("/nuevo")
+    public ResponseEntity<?> registrarEmpleado(@RequestBody EmpleadoDTO empleadoDto) throws DaoException {
+        Empleado empleado = new Empleado(
+                empleadoDto.getNombre(),
+                empleadoDto.getApellido(),
+                empleadoDto.getFechaNacimiento(),
+                empleadoDto.getFechaIngreso(),
+                empleadoDto.getArea(),
+                empleadoDto.getSueldoBruto());
+
+        dao.createEmpleado(empleado);
+        return ResponseEntity.ok("Empleado registrado");
+
     }
 
     @GetMapping("/recibo/{id}")
@@ -52,23 +69,22 @@ public class EmpleadoController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error de datos!");
         }
     }
-    
+
     @PostMapping("/recibos/nuevo")
-    public ResponseEntity<?> registrarRecibo(@RequestBody ReciboDTO reciboDto) throws DaoException{
+    public ResponseEntity<?> registrarRecibo(@RequestBody ReciboDTO reciboDto) throws DaoException {
         Empleado aux = new Empleado();
         aux.setLegajo(reciboDto.getLegajo());
-        Recibo recibo = new Recibo(0, 
+        Recibo recibo = new Recibo(0,
                 reciboDto.getMes(),
                 reciboDto.getAnio(),
                 reciboDto.getAntiguedad(),
                 reciboDto.getJubilacion(),
                 reciboDto.getObraSocial(),
-                reciboDto.getFondoComplejidad(), 
+                reciboDto.getFondoComplejidad(),
                 aux);
         dao.createRecibo(recibo);
         return ResponseEntity.ok("Recibo registrado");
-        
+
     }
-    
 
 }

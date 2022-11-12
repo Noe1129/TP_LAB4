@@ -32,6 +32,16 @@ import org.hibernate.annotations.Formula;
 @Table(name = "empleados")
 public class Empleado {
 
+    public Empleado(String nombre, String apellido, Date fechaNacimiento, Date fechaIngreso, String area, double sueldoBruto) {
+
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.fechaNacimiento = fechaNacimiento;
+        this.fechaIngreso = fechaIngreso;
+        this.area = area;
+        this.sueldoBruto = sueldoBruto;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "legajo")
@@ -57,8 +67,7 @@ public class Empleado {
         recibo.setEmpleado(this);
         recibos.add(recibo);
     }
-    
-           
+
     @Formula("year(now())-year(fecha_ingreso)")
     private int antiguedad;
 

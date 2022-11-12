@@ -17,7 +17,10 @@ public interface EmpleadoRepository {
 
     List<Empleado> getAll() throws DaoException;
 
+    void createEmpleado(Empleado empleado) throws DaoException;
+
     List<Recibo> getbyId(int id) throws DaoException;
 
     void createRecibo(Recibo recibo) throws DaoException;
+
 }
