@@ -71,6 +71,17 @@ CREATE TABLE `recibos` (
 --
 -- Dumping data for table `recibos`
 --
+INSERT INTO empleados (nombre,apellido,fecha_nac,fecha_ingreso,area,sueldo_bruto)
+VALUES ('jose','ramirez',"1995-03-17","2018-10-27",'tesoreria',210000);
+
+INSERT INTO recibos (anio,mes,monto_antig,jubilacion,obra_social,fondo_complej,legajo)
+VALUES (2022,11,13000,7000,6000,4000,3);
+
+CREATE VIEW ReporteSueldoArea as
+SELECT anio, mes, area, SUM(sueldo_bruto+monto_antig-(jubilacion+obra_social+fondo_complej)) as 'Neto'
+FROM empleados e JOIN recibos r ON e.legajo= r.legajo
+GROUP BY area,mes,anio
+ORDER BY 4;
 
 LOCK TABLES `recibos` WRITE;
 /*!40000 ALTER TABLE `recibos` DISABLE KEYS */;
