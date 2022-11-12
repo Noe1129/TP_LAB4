@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -30,8 +31,19 @@ import org.hibernate.annotations.Formula;
 @Entity
 @Table(name = "recibos")
 public class Recibo {
+
+    public Recibo(int nroRecibo, int mes, int anio, double antiguedad, double jubilacion, double obraSocial, double fondoComplejidad, Empleado empleado) {
+        this.nroRecibo = nroRecibo;
+        this.mes = mes;
+        this.anio = anio;
+        this.antiguedad = antiguedad;
+        this.jubilacion = jubilacion;
+        this.obraSocial = obraSocial;
+        this.fondoComplejidad = fondoComplejidad;
+        this.empleado = empleado;
+    }
         @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "nro_recibo")
     private int nroRecibo;
 
@@ -65,6 +77,6 @@ public class Recibo {
 //    private float sueldoNeto;
         
     @Formula("(select empleados.sueldo_bruto+monto_antig-(obra_social+fondo_complej+jubilacion) from empleados where empleados.legajo=legajo)")
-    private float sueldoBruto;
+    private float sueldoNeto;
     
 }

@@ -14,6 +14,10 @@ import java.util.List;
  * @author gonza
  */
 public interface EmpleadoRepository {
+
     List<Empleado> getAll() throws DaoException;
-    List<Recibo> getbyId(int id) throws DaoException ;
+
+    List<Recibo> getbyId(int id) throws DaoException;
+
+    void createRecibo(Recibo recibo) throws DaoException;
 }

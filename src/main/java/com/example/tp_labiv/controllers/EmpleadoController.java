@@ -5,6 +5,9 @@
 package com.example.tp_labiv.controllers;
 
 import com.example.tp_labiv.data.exceptions.DaoException;
+import com.example.tp_labiv.dtos.ReciboDTO;
+import com.example.tp_labiv.models.Empleado;
+import com.example.tp_labiv.models.Recibo;
 import com.example.tp_labiv.repositories.EmpleadoRepository;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +15,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -23,10 +28,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 //@RequestMapping("/empleados")//de similtp
 public class EmpleadoController {
+
     @Autowired //de producto
     private EmpleadoRepository dao;
 
-    
     @GetMapping("/empleados")
     public ResponseEntity<?> getAll() {
         try {
@@ -35,8 +40,8 @@ public class EmpleadoController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }
-    
-         @GetMapping("/recibo/{id}")
+
+    @GetMapping("/recibo/{id}")
     public ResponseEntity<?> getById(@PathVariable int id) {
         if (id == 0) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Id recibo no puede ser 0");
@@ -47,7 +52,23 @@ public class EmpleadoController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error de datos!");
         }
     }
-
-
     
+    @PostMapping("/recibos/nuevo")
+    public ResponseEntity<?> registrarRecibo(@RequestBody ReciboDTO reciboDto) throws DaoException{
+        Empleado aux = new Empleado();
+        aux.setLegajo(reciboDto.getLegajo());
+        Recibo recibo = new Recibo(0, 
+                reciboDto.getMes(),
+                reciboDto.getAnio(),
+                reciboDto.getAntiguedad(),
+                reciboDto.getJubilacion(),
+                reciboDto.getObraSocial(),
+                reciboDto.getFondoComplejidad(), 
+                aux);
+        dao.createRecibo(recibo);
+        return ResponseEntity.ok("Recibo registrado");
+        
+    }
+    
+
 }
