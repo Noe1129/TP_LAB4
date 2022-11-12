@@ -18,6 +18,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Formula;
 
 /**
  *
@@ -56,5 +57,9 @@ public class Empleado {
         recibo.setEmpleado(this);
         recibos.add(recibo);
     }
+    
+           
+    @Formula("year(now())-year(fecha_ingreso)")
+    private int antiguedad;
 
 }
