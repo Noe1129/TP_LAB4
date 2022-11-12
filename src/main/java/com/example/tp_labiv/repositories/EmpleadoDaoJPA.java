@@ -7,16 +7,14 @@ package com.example.tp_labiv.repositories;
 import com.example.tp_labiv.data.exceptions.DaoException;
 import com.example.tp_labiv.models.Empleado;
 import com.example.tp_labiv.models.Recibo;
+import com.example.tp_labiv.models.Reporte;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
-/**
- *
- * @author gonza
- */
+
 @Repository
 public class EmpleadoDaoJPA implements EmpleadoRepository {
 
@@ -46,5 +44,10 @@ public class EmpleadoDaoJPA implements EmpleadoRepository {
 
         em.merge(recibo);
     }
+    
+
+
+    
+
 
 }

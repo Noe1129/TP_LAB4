@@ -70,5 +70,6 @@ public class Empleado {
 
     @Formula("year(now())-year(fecha_ingreso)")
     private int antiguedad;
+    
 
 }

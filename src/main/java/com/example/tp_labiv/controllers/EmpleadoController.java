@@ -9,7 +9,10 @@ import com.example.tp_labiv.dtos.EmpleadoDTO;
 import com.example.tp_labiv.dtos.ReciboDTO;
 import com.example.tp_labiv.models.Empleado;
 import com.example.tp_labiv.models.Recibo;
+import com.example.tp_labiv.models.Reporte;
 import com.example.tp_labiv.repositories.EmpleadoRepository;
+import java.util.List;
+import javax.transaction.Transactional;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,13 +24,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- *
- * @author gonza
- */
 @RestController
 @Setter
-
 @RequestMapping("/empleados")//de similtp
 public class EmpleadoController {
 
@@ -86,5 +84,7 @@ public class EmpleadoController {
         return ResponseEntity.ok("Recibo registrado");
 
     }
+
+
 
 }
