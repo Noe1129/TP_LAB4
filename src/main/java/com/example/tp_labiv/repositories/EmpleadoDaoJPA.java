@@ -11,6 +11,7 @@ import com.example.tp_labiv.models.Reporte;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
@@ -43,6 +44,19 @@ public class EmpleadoDaoJPA implements EmpleadoRepository {
         emp.addRecibo(recibo);
 
         em.merge(recibo);
+    }
+    
+        @Override
+    public List<String[]> getReporte(int anio, int mes) throws DaoException {
+       
+        String consulta="select sum(sueldo_bruto+monto_antig-(obra_social+fondo_complej+jubilacion)) as sueldoNeto, empleados.area\n" +
+"from empleados join recibos on empleados.legajo=recibos.legajo where recibos.anio=(:anio) and recibos.mes=(:mes)\n" +
+"group by empleados.area\n" +
+"order by sueldoNeto"; 
+        Query q = em.createNativeQuery(consulta);
+         q.setParameter("anio", anio);
+         q.setParameter("mes", mes);
+        return (List<String[]>) q.getResultList();
     }
     
 

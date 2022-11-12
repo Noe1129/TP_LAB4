@@ -7,10 +7,7 @@ package com.example.tp_labiv.repositories;
 import com.example.tp_labiv.models.Reporte;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-/**
- *
- * @author gonza
- */
-public interface ReporteRepository extends JpaRepository<Reporte,Long> {
-    
+
+public interface ReporteRepository extends JpaRepository<Reporte, Long> {
+
 }

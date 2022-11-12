@@ -19,11 +19,12 @@ import org.hibernate.annotations.Synchronize;
 //        + "where recibos.anio=2022 and recibos.mes=11\n"
 //        + "group by empleados.area\n"
 //        + "order by sueldoNeto")
-@Subselect("select sum(sueldo_bruto+monto_antig-(obra_social+fondo_complej+jubilacion)) as sueldo_neto, empleados.area \n"
+@Subselect("select sum(sueldo_bruto+monto_antig-(obra_social+fondo_complej+jubilacion)) as sueldo_neto, empleados.area,anio,mes \n"
         + "from empleados join recibos on empleados.legajo=recibos.legajo \n"
-        + "where recibos.anio=2022 and recibos.mes=11\n"
-        + "group by empleados.area\n"
-        + "order by sueldo_neto")
+        //        + "where recibos.anio=2022 and recibos.mes=11\n"
+                + "group by empleados.area\n"
+      //  + "order by sueldo_neto")
+)
 @Synchronize({"empleados", "recibos"})
 @Getter
 @Setter
@@ -35,5 +36,8 @@ public class Reporte {
     @Id
     private double sueldoNeto;
     private String area;
+    private int anio;
+    private int mes;
+            
 
 }

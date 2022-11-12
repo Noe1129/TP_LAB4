@@ -15,7 +15,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
  *
  * @author gonza
  */
-public interface EmpleadoRepository  {
+public interface EmpleadoRepository {
 
     List<Empleado> getAll() throws DaoException;
 
@@ -24,6 +24,7 @@ public interface EmpleadoRepository  {
     List<Recibo> getbyId(int id) throws DaoException;
 
     void createRecibo(Recibo recibo) throws DaoException;
-    
-  
+
+    public List<String[]> getReporte(int anio, int mes) throws DaoException;
+
 }

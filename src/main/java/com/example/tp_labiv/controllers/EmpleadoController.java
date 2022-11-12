@@ -84,6 +84,15 @@ public class EmpleadoController {
         return ResponseEntity.ok("Recibo registrado");
 
     }
+    
+        @GetMapping("/reporte/{anio}/{mes}")
+    public ResponseEntity<?> getReporte(@PathVariable int anio,@PathVariable int mes) {
+        try {
+            return ResponseEntity.ok(dao.getReporte(anio,mes));
+        } catch (DaoException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
 
 
 
