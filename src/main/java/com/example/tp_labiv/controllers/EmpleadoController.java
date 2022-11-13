@@ -52,7 +52,7 @@ public class EmpleadoController {
                 empleadoDto.getSueldoBruto());
 
         dao.createEmpleado(empleado);
-        return ResponseEntity.ok("Empleado registrado");
+        return ResponseEntity.ok(empleado);
 
     }
 
@@ -81,7 +81,7 @@ public class EmpleadoController {
                 reciboDto.getFondoComplejidad(),
                 aux);
         dao.createRecibo(recibo);
-        return ResponseEntity.ok("Recibo registrado");
+        return ResponseEntity.ok(recibo);
 
     }
     
