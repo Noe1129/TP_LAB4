@@ -19,10 +19,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Formula;
 
-/**
- *
- * @author gonza
- */
 @Getter
 @Setter
 @AllArgsConstructor

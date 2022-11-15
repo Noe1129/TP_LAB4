@@ -5,12 +5,10 @@
 package com.example.tp_labiv.repositories;
 
 import com.example.tp_labiv.data.exceptions.DaoException;
-import com.example.tp_labiv.dtos.ReporteDTO;
 import com.example.tp_labiv.dtos.ReporteSueldoArea;
 import com.example.tp_labiv.models.Empleado;
 import com.example.tp_labiv.models.Recibo;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -18,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.sql.DataSource;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,10 +56,10 @@ public class EmpleadoDaoJPA implements EmpleadoRepository {
 
     @Override
     public List<ReporteSueldoArea> getReporte(int year, int month) throws DaoException {
-        
+
         List<ReporteSueldoArea> lst = new ArrayList<>();
-        String consulta = "SELECT * FROM ReporteSueldoArea WHERE anio="+ year +" AND mes="+month;
-        
+        String consulta = "SELECT * FROM ReporteSueldoArea WHERE anio=" + year + " AND mes=" + month;
+
         try ( Connection cnn = dataSource.getConnection();  Statement st = cnn.createStatement();  ResultSet rs = st.executeQuery(consulta);) {
             while (rs.next()) {
                 int anio = rs.getInt("anio");

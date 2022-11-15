@@ -7,18 +7,15 @@ package com.example.tp_labiv.data.exceptions;
 import lombok.Getter;
 import lombok.Setter;
 
-/**
- *
- * @author gonza
- */
 @Setter
 @Getter
-public class DaoException extends Exception{
-        private String message;
+public class DaoException extends Exception {
+
+    private String message;
 
     public DaoException(String message, Throwable cause) {
         super(cause);
         this.message = message;
     }
-    
+
 }

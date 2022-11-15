@@ -4,10 +4,6 @@
  */
 package com.example.tp_labiv.dtos;
 
-/**
- *
- * @author gonza
- */
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

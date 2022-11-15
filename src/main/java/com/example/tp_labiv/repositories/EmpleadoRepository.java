@@ -5,7 +5,6 @@
 package com.example.tp_labiv.repositories;
 
 import com.example.tp_labiv.data.exceptions.DaoException;
-import com.example.tp_labiv.dtos.ReporteDTO;
 import com.example.tp_labiv.dtos.ReporteSueldoArea;
 import com.example.tp_labiv.models.Empleado;
 import com.example.tp_labiv.models.Recibo;
